@@ -2,188 +2,204 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>UCZta Polska</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UCZTA Polska</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
 body{
-  margin:0;
-  font-family: Arial;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      #f7e7d3,
-      #f7e7d3 40px,
-      #f2d7b5 40px,
-      #f2d7b5 80px
-    );
-  text-align:center;
+width:100vw;
+height:100vh;
+overflow:hidden;
+
+background-image:url("tło2.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
 }
 
-/* MENU */
-#menu{
-  width:300px;
-  margin:80px auto;
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+/* ================= MENU ================= */
+
+#menuScreen{
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
-.opcja{
-  margin:10px;
-  padding:10px;
-  background:#f8f8f8;
-  cursor:pointer;
+.menuContainer{
+position:relative;
+width:min(70vw,1200px);
 }
 
-/* TALERZ */
-#gra{
-  display:none;
-  margin-top:40px;
+.menuContainer img{
+width:100%;
+display:block;
 }
 
-.talerz{
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background:white;
-  margin:20px auto;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
-  padding:20px;
-  position:relative;
+.menuButtons{
+position:absolute;
+top:30%;
+left:0;
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:25px;
 }
 
-.slots{
-  margin-top:20px;
-  font-size:20px;
-  letter-spacing:5px;
+.menuButton{
+font-size:2rem;
+cursor:pointer;
+padding:10px 20px;
+border-radius:12px;
+transition:0.2s;
 }
 
-/* PODPOWIEDZI */
-.hint{
-  display:inline-block;
-  margin:5px;
-  padding:5px 10px;
-  background:#ddd;
-  cursor:pointer;
+.menuButton:hover{
+background:rgba(255,255,255,0.3);
 }
 
-/* PARAGON */
-#paragon{
-  display:none;
-  width:300px;
-  margin:20px auto;
-  background:white;
-  padding:20px;
-  border:1px dashed black;
+/* ================= GRA ================= */
+
+#gameScreen{
+display:none;
+width:100%;
+height:100%;
 }
 
-.highlight1{ background:yellow; }
-.highlight2{ background:lightblue; }
-.highlight3{ background:lightgreen; }
+.gameWrapper{
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:20px;
+}
+
+.plate{
+width:min(75vw,700px);
+height:min(75vw,700px);
+
+border-radius:50%;
+background:white;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+padding:40px;
+
+box-shadow:0 0 30px rgba(0,0,0,0.2);
+}
+
+.riddle{
+font-size:1.4rem;
+text-align:center;
+line-height:1.6;
+}
+
+.answer{
+margin-top:20px;
+font-size:2rem;
+letter-spacing:10px;
+}
+
+input{
+margin-top:20px;
+padding:15px;
+font-size:1.2rem;
+width:min(80vw,400px);
+}
+
+button{
+padding:12px 24px;
+font-size:1rem;
+cursor:pointer;
+}
 
 </style>
 </head>
-
 <body>
 
 <!-- MENU -->
-<div id="menu">
-<h2>UCZTA Polska</h2>
-<p>MENU</p>
 
-<div class="opcja" onclick="start()">Danie dnia</div>
-<div class="opcja">Spiżarnia</div>
-<div class="opcja">Przepiśnik</div>
-<div class="opcja">Rekordy</div>
+<div id="menuScreen">
+
+<div class="menuContainer">
+
+<img src="menu.png" alt="menu">
+
+<div class="menuButtons">
+
+<div class="menuButton" onclick="openGame()">
+Danie dnia
+</div>
+
+<div class="menuButton">
+Spiżarnia
+</div>
+
+<div class="menuButton">
+Przepiśnik
+</div>
+
+<div class="menuButton">
+Rekordy
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 <!-- GRA -->
-<div id="gra">
 
-<div class="talerz">
-<p id="zagadka">Profesjonalne meble bez końca przestawiane...?</p>
+<div id="gameScreen">
 
-<div class="slots" id="slots">_ _ _ _ _ _ _</div>
+<div class="gameWrapper">
 
-<!-- PODPOWIEDZI -->
-<div>
-<div class="hint" onclick="hint('przepis')">Sól</div>
-<div class="hint" onclick="hint('skladnik')">Pieprz</div>
-<div class="hint" onclick="hint('przystawka')">Ocet</div>
-<div class="hint" onclick="hint('litera')">Wykałaczka</div>
-</div>
+<div class="plate">
 
-<input id="input" placeholder="Twoja odpowiedź">
-<br>
-<button onclick="check()">Sprawdź</button>
+<div class="riddle">
+
+Temat: profesjonalne meble bez końca przestawiane...?
 
 </div>
 
+<div class="answer">
+
+_ _ _ _ _ _ _
+
 </div>
 
-<!-- PARAGON -->
-<div id="paragon">
-<h3>PARAGON</h3>
-<p id="wynik"></p>
-<p id="punkty"></p>
+<input
+placeholder="Wpisz odpowiedź">
+
+</div>
+
+</div>
+
 </div>
 
 <script>
 
-let word = "PROBLEM";
-let hintsUsed = 0;
+function openGame(){
 
-function start(){
-  document.getElementById("menu").style.display="none";
-  document.getElementById("gra").style.display="block";
-}
+document.getElementById("menuScreen").style.display="none";
 
-/* PODPOWIEDZI */
-function hint(type){
-
-hintsUsed++;
-
-if(type==="przepis"){
-  document.getElementById("zagadka").innerHTML =
-  "Profesjonalne <span class='highlight1'>meble</span> bez końca przestawiane...?";
-}
-
-if(type==="skladnik"){
-  document.getElementById("zagadka").innerHTML =
-  "Profesjonalne <span class='highlight2'>meble</span> bez końca przestawiane...?";
-}
-
-if(type==="przystawka"){
-  document.getElementById("zagadka").innerHTML =
-  "<span class='highlight3'>Temat:</span> profesjonalne meble bez końca przestawiane...?";
-}
-
-if(type==="litera"){
-  let i = Math.floor(Math.random()*word.length);
-  let arr = Array(word.length).fill("_");
-  arr[i] = word[i];
-  document.getElementById("slots").innerText = arr.join(" ");
-}
-
-}
-
-/* SPRAWDZANIE */
-function check(){
-
-let val = document.getElementById("input").value.toUpperCase();
-
-document.getElementById("gra").style.display="none";
-document.getElementById("paragon").style.display="block";
-
-document.getElementById("wynik").innerHTML =
-"Odpowiedź: " + word;
-
-let stars = 5 - hintsUsed;
-if(stars < 1) stars = 1;
-
-document.getElementById("punkty").innerHTML =
-"Gwiazdy: " + "⭐".repeat(stars);
+document.getElementById("gameScreen").style.display="block";
 
 }
 
