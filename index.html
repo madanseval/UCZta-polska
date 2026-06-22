@@ -12,84 +12,78 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:Arial;
 }
+
+/* ================== TŁO ================== */
 
 body{
-width:100vw;
-height:100vh;
-overflow:hidden;
 
+/* tło2.jpg */
 background-image:url("tło2.jpg");
+
 background-size:cover;
 background-position:center;
-background-repeat:no-repeat;
+height:100vh;
+overflow:hidden;
 }
 
-/* ================= MENU ================= */
+/* ================== MENU ================== */
 
 #menuScreen{
-width:100%;
-height:100%;
 display:flex;
 justify-content:center;
 align-items:center;
+height:100vh;
 }
 
-.menuContainer{
-position:relative;
-width:min(70vw,1200px);
-}
-
-.menuContainer img{
+/* menu .png */
+.menuBox img{
 width:100%;
-display:block;
+}
+
+/* ================== PRZYCISKI ================== */
+
+.menuBox{
+position:relative;
+width:70vw;
+max-width:1200px;
 }
 
 .menuButtons{
 position:absolute;
-top:30%;
+top:35%;
 left:0;
 width:100%;
+text-align:center;
 display:flex;
 flex-direction:column;
-align-items:center;
-gap:25px;
-}
-
-.menuButton{
-font-size:2rem;
-cursor:pointer;
-padding:10px 20px;
-border-radius:12px;
-transition:0.2s;
-}
-
-.menuButton:hover{
-background:rgba(255,255,255,0.3);
-}
-
-/* ================= GRA ================= */
-
-#gameScreen{
-display:none;
-width:100%;
-height:100%;
-}
-
-.gameWrapper{
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
 gap:20px;
 }
 
-.plate{
-width:min(75vw,700px);
-height:min(75vw,700px);
+.button{
+font-size:28px;
+cursor:pointer;
+padding:10px;
+}
 
+.button:hover{
+background:rgba(255,255,255,0.3);
+}
+
+/* ================== GRA ================== */
+
+#gameScreen{
+display:none;
+height:100vh;
+justify-content:center;
+align-items:center;
+}
+
+.plate{
+
+width:70vmin;
+height:70vmin;
 border-radius:50%;
 background:white;
 
@@ -98,96 +92,75 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 
-padding:40px;
-
-box-shadow:0 0 30px rgba(0,0,0,0.2);
-}
-
-.riddle{
-font-size:1.4rem;
 text-align:center;
-line-height:1.6;
+padding:20px;
 }
 
 .answer{
 margin-top:20px;
-font-size:2rem;
+font-size:32px;
 letter-spacing:10px;
 }
 
 input{
 margin-top:20px;
-padding:15px;
-font-size:1.2rem;
-width:min(80vw,400px);
-}
-
-button{
-padding:12px 24px;
-font-size:1rem;
-cursor:pointer;
+padding:10px;
+font-size:18px;
 }
 
 </style>
 </head>
+
 <body>
 
-<!-- MENU -->
+<!-- ================= MENU ================= -->
 
 <div id="menuScreen">
 
-<div class="menuContainer">
+<div class="menuBox">
 
-<img src="menu .png" alt="menu">
+<!-- menu .png -->
+<img src="menu .png">
 
 <div class="menuButtons">
 
-<div class="menuButton" onclick="openGame()">
-Danie dnia
+<div class="button" onclick="startGame()">
+DANIE DNIA
 </div>
 
-<div class="menuButton">
-Spiżarnia
+<div class="button">
+SPIŻARNIA
 </div>
 
-<div class="menuButton">
-Przepiśnik
+<div class="button">
+PRZEPIŚNIK
 </div>
 
-<div class="menuButton">
-Rekordy
-</div>
-
-</div>
-
+<div class="button">
+REKORDY
 </div>
 
 </div>
 
-<!-- GRA -->
+</div>
+
+</div>
+
+<!-- ================= GRA ================= -->
 
 <div id="gameScreen">
 
-<div class="gameWrapper">
-
 <div class="plate">
 
-<div class="riddle">
-
-Temat: profesjonalne meble bez końca przestawiane...?
-
+<div>
+TEMAT: profesjonalne meble bez końca przestawiane...
 </div>
 
 <div class="answer">
-
 _ _ _ _ _ _ _
-
 </div>
 
-<input
-placeholder="Wpisz odpowiedź">
-
-</div>
+<input placeholder="Wpisz odpowiedź">
 
 </div>
 
@@ -195,12 +168,9 @@ placeholder="Wpisz odpowiedź">
 
 <script>
 
-function openGame(){
-
+function startGame(){
 document.getElementById("menuScreen").style.display="none";
-
-document.getElementById("gameScreen").style.display="block";
-
+document.getElementById("gameScreen").style.display="flex";
 }
 
 </script>
