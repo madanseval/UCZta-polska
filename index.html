@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>UCZta Polska</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #f7e7d3,
+      #f7e7d3 40px,
+      #f2d7b5 40px,
+      #f2d7b5 80px
+    );
+  text-align:center;
+}
+
+/* MENU */
+#menu{
+  width:300px;
+  margin:80px auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.opcja{
+  margin:10px;
+  padding:10px;
+  background:#f8f8f8;
+  cursor:pointer;
+}
+
+/* TALERZ */
+#gra{
+  display:none;
+  margin-top:40px;
+}
+
+.talerz{
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:white;
+  margin:20px auto;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  padding:20px;
+  position:relative;
+}
+
+.slots{
+  margin-top:20px;
+  font-size:20px;
+  letter-spacing:5px;
+}
+
+/* PODPOWIEDZI */
+.hint{
+  display:inline-block;
+  margin:5px;
+  padding:5px 10px;
+  background:#ddd;
+  cursor:pointer;
+}
+
+/* PARAGON */
+#paragon{
+  display:none;
+  width:300px;
+  margin:20px auto;
+  background:white;
+  padding:20px;
+  border:1px dashed black;
+}
+
+.highlight1{ background:yellow; }
+.highlight2{ background:lightblue; }
+.highlight3{ background:lightgreen; }
+
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+<div id="menu">
+<h2>UCZTA Polska</h2>
+<p>MENU</p>
+
+<div class="opcja" onclick="start()">Danie dnia</div>
+<div class="opcja">Spiżarnia</div>
+<div class="opcja">Przepiśnik</div>
+<div class="opcja">Rekordy</div>
+</div>
+
+<!-- GRA -->
+<div id="gra">
+
+<div class="talerz">
+<p id="zagadka">Profesjonalne meble bez końca przestawiane...?</p>
+
+<div class="slots" id="slots">_ _ _ _ _ _ _</div>
+
+<!-- PODPOWIEDZI -->
+<div>
+<div class="hint" onclick="hint('przepis')">Sól</div>
+<div class="hint" onclick="hint('skladnik')">Pieprz</div>
+<div class="hint" onclick="hint('przystawka')">Ocet</div>
+<div class="hint" onclick="hint('litera')">Wykałaczka</div>
+</div>
+
+<input id="input" placeholder="Twoja odpowiedź">
+<br>
+<button onclick="check()">Sprawdź</button>
+
+</div>
+
+</div>
+
+<!-- PARAGON -->
+<div id="paragon">
+<h3>PARAGON</h3>
+<p id="wynik"></p>
+<p id="punkty"></p>
+</div>
+
+<script>
+
+let word = "PROBLEM";
+let hintsUsed = 0;
+
+function start(){
+  document.getElementById("menu").style.display="none";
+  document.getElementById("gra").style.display="block";
+}
+
+/* PODPOWIEDZI */
+function hint(type){
+
+hintsUsed++;
+
+if(type==="przepis"){
+  document.getElementById("zagadka").innerHTML =
+  "Profesjonalne <span class='highlight1'>meble</span> bez końca przestawiane...?";
+}
+
+if(type==="skladnik"){
+  document.getElementById("zagadka").innerHTML =
+  "Profesjonalne <span class='highlight2'>meble</span> bez końca przestawiane...?";
+}
+
+if(type==="przystawka"){
+  document.getElementById("zagadka").innerHTML =
+  "<span class='highlight3'>Temat:</span> profesjonalne meble bez końca przestawiane...?";
+}
+
+if(type==="litera"){
+  let i = Math.floor(Math.random()*word.length);
+  let arr = Array(word.length).fill("_");
+  arr[i] = word[i];
+  document.getElementById("slots").innerText = arr.join(" ");
+}
+
+}
+
+/* SPRAWDZANIE */
+function check(){
+
+let val = document.getElementById("input").value.toUpperCase();
+
+document.getElementById("gra").style.display="none";
+document.getElementById("paragon").style.display="block";
+
+document.getElementById("wynik").innerHTML =
+"Odpowiedź: " + word;
+
+let stars = 5 - hintsUsed;
+if(stars < 1) stars = 1;
+
+document.getElementById("punkty").innerHTML =
+"Gwiazdy: " + "⭐".repeat(stars);
+
+}
+
+</script>
+
+</body>
+</html>
